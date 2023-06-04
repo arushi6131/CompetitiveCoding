@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static int maximumProduct(ArrayList<Integer> arr, int n) {
+		// Write your code here.
+		int p1=arr.get(0);
+		int p2=arr.get(0);
+		int maxp=arr.get(0);
+
+		for(int i=1; i<arr.size(); i++){
+			int temp = Math.max(arr.get(i), Math.max(p1*arr.get(i), p2*arr.get(i)));
+			p2=Math.min(arr.get(i), Math.min(p1*arr.get(i), p2*arr.get(i)));
+			p1=temp;
+			maxp=Math.max(maxp, p1);
+		}
+		return maxp;
+
+		//Brute Force
+		// int maxp= Integer.MIN_VALUE;
+		// for(int i=0;i<array.length-1;i++){
+		// 	for(int j=i+1; j<array.length;j++){
+		// 		int p = 1;
+		// 		for(int num=i;num<=j;num++){
+		// 			p*=array[num];
+		// 			System.out.println(p);
+		// 		}
+		// 		if(maxp<p) maxp=p;
+		// 	}
+		// }
+		// return maxp;
+	}
+}
