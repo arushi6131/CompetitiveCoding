@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+	public static int maxProfit(ArrayList<Integer> values, ArrayList<Integer> weights, int n, int w) {
+		// Write your code here.
+		int dp[][] = new int[values.size()][w+1];
+		for( int[] rows: dp){
+			Arrays.fill(rows, -1);
+		}
+		return f(values, weights, w, values.size()-1,dp);
+	}
+
+	public static int f(ArrayList<Integer> values, ArrayList<Integer> weights, int W, int i, int dp[][]){
+		if(i==0){
+			if(weights.get(0)<=W) return values.get(0);
+			return 0;
+		}
+
+		if(dp[i][W] != -1){
+			return dp[i][W];
+		}
+
+		int notTake = 0 + f(values, weights, W, i-1,dp);
+		int take = 0;
+
+		if(weights.get(i)<=W){
+			take= values.get(i)+f(values,weights,W-weights.get(i),i-1,dp);
+		}
+
+		return dp[i][W] = Math.max(take, notTake);
+	}
+}
