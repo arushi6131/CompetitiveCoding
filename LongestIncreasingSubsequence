@@ -1,0 +1,29 @@
+import java.util.Arrays;
+
+public class Solution {
+
+	public static int longestIncreasingSubsequence(int arr[]) {
+		//Your code goes here
+		int dp[][] = new int[arr.length][arr.length+1];
+		for(int row[]: dp)
+    		Arrays.fill(row, -1);
+		return f(arr, 0, -1,dp);
+	}
+
+	public static int f(int arr[], int i, int last_ind, int dp[][]){
+		if(i==arr.length){ return 0;}
+
+		if(dp[i][last_ind+1] != -1)
+        	return dp[i][last_ind+1];
+
+		int notTake = 0 + f(arr,i+1,last_ind,dp);
+		int take=0;
+
+		if(last_ind==-1 || arr[last_ind]<arr[i]){
+			take= 1+ f(arr,i+1,i,dp);
+		}
+
+		return dp[i][last_ind+1]=Math.max(notTake, take);
+	}
+
+}
