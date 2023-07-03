@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static void setZeros(int matrix[][]) {
+        // Write your code here..
+        int rowMarker[] = new int[matrix.length];
+        int colMarker[] = new int[matrix[0].length];
+
+
+        Arrays.fill(rowMarker, -1);
+        Arrays.fill(colMarker, -1);
+
+        // for(int i=0;i<rowMarker.length;i++){
+        //     System.out.println(rowMarker[i]);
+        // }
+        // for(int i=0;i<colMarker.length;i++){
+        //     System.out.println(colMarker[i]);
+        // }
+
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    rowMarker[i]=0;
+                    colMarker[j]=0;
+                }
+            }
+        }
+
+        for(int i=0;i<rowMarker.length;i++){
+            if(rowMarker[i]==0){
+                Arrays.fill(matrix[i], 0);
+            }
+        }
+
+        for(int i=0;i<colMarker.length;i++){
+            if(colMarker[i]==0){
+                for(int j=0;j<rowMarker.length;j++){
+                    matrix[j][i]=0;
+                }
+            }
+        }
+
+    }
+
+}
