@@ -1,0 +1,19 @@
+public class Solution {
+    public static int bestTimeToBuyAndSellStock(int []prices) {
+        // Write your code here.
+        int lowestEl = Integer.MAX_VALUE;
+        int maxp = 0;
+
+        for(int i=0;i<prices.length;i++){
+            if(lowestEl>prices[i]){
+                lowestEl = prices[i];
+            }
+            int p = prices[i]-lowestEl;
+            if(p>maxp){
+                maxp=p;
+            }
+        }
+
+        return maxp;
+    }
+}
