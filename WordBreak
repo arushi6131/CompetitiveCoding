@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+public class Solution {
+    public static List< String > getAllValidSentences(String s, String []dict) {
+        //  write your code here.
+        List< String > FinalAns = new ArrayList<String>();
+        f(s,"",dict,FinalAns);
+        return FinalAns;
+    }
+
+    public static void f(String str, String ans, String[] dict, List<String> FinalAns){
+        if(str.length()==0){
+            FinalAns.add(ans.trim());
+            return;
+        }
+
+        for(int i=0;i<str.length();i++){
+            String left = str.substring(0,i+1);
+            if(Arrays.asList(dict).contains(left)){
+                String right = str.substring(i+1);
+                f(right,ans+left+" ",dict,FinalAns);
+            }
+        }
+    }
+}
