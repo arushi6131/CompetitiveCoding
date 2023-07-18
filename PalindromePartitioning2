@@ -1,0 +1,39 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static int palindromePartitioning(String str) {
+	    // Write your code here
+		int dp[] = new int[str.length()];
+		Arrays.fill(dp, -1);
+		return f(0,str,dp) - 1;
+	}
+
+	public static boolean isPalindrome(int i, int j, String str){
+		while(i<j){
+			if(str.charAt(i) != str.charAt(j)){
+				return false;
+			}
+			i++;
+			j--;
+		}
+		return true;
+	}
+
+	public static int f(int i, String str, int[] dp){
+		if(i==str.length()) return 0;
+
+		if(dp[i]!= -1) return dp[i];
+
+		int minCost = Integer.MAX_VALUE;
+
+		for(int j=i;j<str.length();j++){
+			if(isPalindrome(i,j,str)){
+				int cost = 1 + f(j+1,str,dp);
+				minCost = Math.min(cost, minCost);
+			}
+		}
+
+		return dp[i] = minCost;
+	}
+}
