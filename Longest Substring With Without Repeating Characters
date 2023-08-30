@@ -1,1 +1,63 @@
-j-i+1
+//{ Driver Code Starts
+//Initial Template for Java
+
+
+import java.io.*;
+import java.util.*;
+class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+        while(t-- > 0)
+        {
+            String S = read.readLine();
+            
+            Solution ob = new Solution();
+            System.out.println(ob.longestSubstrDistinctChars(S));
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution{
+    static int longestSubstrDistinctChars(String s){
+        // code here
+        int i=0;
+        int j=0;
+        HashMap<Character,Integer> hashmap = new HashMap<>();
+        int max=-1;
+        
+        while(j<s.length()){
+            char c1 = s.charAt(j);
+            if(hashmap.containsKey(c1)){
+                hashmap.put(c1,hashmap.get(c1)+1);
+            }
+            else{
+                hashmap.put(c1,1);
+            }
+            
+            if(hashmap.size()==j-i+1){
+                max=Math.max(max,j-i+1);
+            }
+            if(hashmap.size()<j-i+1){
+                while(hashmap.size()<j-i+1){
+                   char c = s.charAt(i);
+                   hashmap.put(c,hashmap.get(c)-1); 
+                   
+                   if(hashmap.get(c)==0){
+                       hashmap.remove(c);
+                   }
+                   i++;
+                }
+            }
+            j++;
+        }
+        return max;
+    }
+}
