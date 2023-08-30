@@ -1,0 +1,64 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        HashMap<Character, Integer> hashmap = new HashMap<>();
+        for(int i=0; i<t.length();i++){
+            char c = t.charAt(i);
+            if(!hashmap.containsKey(c)){
+                hashmap.put(c,1);
+            }
+            else{
+                hashmap.put(c,hashmap.get(c)+1);
+            }
+        }
+
+        int i=0;
+        int j=0;
+        int count = hashmap.size();
+
+        int start=0;
+        int end=0;
+        int minLen=Integer.MAX_VALUE;
+
+        while(j<s.length()){
+            char c = s.charAt(j);
+            if(hashmap.containsKey(c)){
+                hashmap.put(c,hashmap.get(c)-1);
+                // System.out.println("here!");
+            }
+
+            int currCount;
+
+            // System.out.println(c+" "+hashmap.get(c));
+
+            if(hashmap.containsKey(c) && hashmap.get(c)==0){
+                count--;
+            }
+
+            if(count==0){
+                while(count==0){
+                    if(minLen > j-i+1) {
+                    minLen =  j-i+1;
+                    start = i;
+                    end = j+1;
+                    }
+                    System.out.println(i);
+                    char ci = s.charAt(i);
+                    if(!hashmap.containsKey(ci)){
+                        i++;
+                    }
+                    else{
+                        hashmap.put(ci,hashmap.get(ci)+1);
+                        System.out.println("here!");
+                        if(hashmap.get(ci)>0) {
+                            count++;
+                        }
+                        i++;
+                    }
+                }
+            }
+            j++;
+        }
+
+        return s.substring(start,end);
+    }
+}
