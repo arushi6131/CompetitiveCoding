@@ -1,0 +1,62 @@
+//{ Driver Code Starts
+// Initial Template for Java
+
+import java.io.*;
+import java.util.*;
+
+class GfG {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            String s = sc.next();
+            int k = sc.nextInt();
+            Solution obj = new Solution();
+            System.out.println(obj.longestkSubstr(s, k));
+        }
+    }
+}
+// } Driver Code Ends
+
+
+// User function Template for Java
+
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        int i=0;
+        int j=0;
+        HashMap<Character,Integer> hashmap = new HashMap<>();
+        int max=-1;
+        
+        while(j<s.length()){
+            char c1 = s.charAt(j);
+            if(hashmap.containsKey(c1)){
+                hashmap.put(c1,hashmap.get(c1)+1);
+            }
+            else{
+                hashmap.put(c1,1);
+            }
+            
+            if(hashmap.size()<k){
+                
+            }
+            if(hashmap.size()==k){
+                max=Math.max(max,j-i+1);
+            }
+            if(hashmap.size()>k){
+                while(hashmap.size()>k){
+                   char c = s.charAt(i);
+                   hashmap.put(c,hashmap.get(c)-1); 
+                   
+                   if(hashmap.get(c)==0){
+                       hashmap.remove(c);
+                   }
+                   i++;
+                }
+            }
+            j++;
+        }
+        return max;
+    }
+}
