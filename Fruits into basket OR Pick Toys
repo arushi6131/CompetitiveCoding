@@ -1,0 +1,40 @@
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int i=0;
+        int j=0;
+        HashMap<Integer,Integer> hashmap = new HashMap<>();
+        int k=2;
+        int max=Integer.MIN_VALUE;
+
+        if(fruits.length==1){
+            return 1;
+        }
+        
+        while(j<fruits.length){
+            int n1 = fruits[j];
+            if(hashmap.containsKey(n1)){
+                hashmap.put(n1,hashmap.get(n1)+1);
+            }
+            else{
+                hashmap.put(n1,1);
+            }
+            if(hashmap.size()<=k){
+                max=Math.max(max,j-i+1);
+            }
+            if(hashmap.size()>k){
+                while(hashmap.size()>k){
+                   int n = fruits[i];
+                   hashmap.put(n,hashmap.get(n)-1); 
+                   
+                   if(hashmap.get(n)==0){
+                       hashmap.remove(n);
+                   }
+                   i++;
+                }
+            }
+            j++;
+        }
+        return max;
+  
+    }
+}
